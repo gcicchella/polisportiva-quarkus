@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+  quarkus_local_db:
+    container_name: quarkus_local_db
+    image: postgres:11.5
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: polisportiva
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"

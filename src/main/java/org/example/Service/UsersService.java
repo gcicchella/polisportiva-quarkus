@@ -1,10 +1,10 @@
 package org.example.Service;
 
 
-import org.example.Model.Users;
+import org.example.Model.User;
 
 import java.util.List;
 
 public interface UsersService {
-    List<Users> findAll();
+    List<User> findAll();
 }

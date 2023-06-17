@@ -2,7 +2,7 @@ package org.example.Service;
 
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
-import org.example.Model.Users;
+import org.example.Model.User;
 import org.example.Repository.UsersRepository;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public class UsersServiceImplementation implements UsersService{
     private UsersRepository usersRepository;
 
     @Override
-    public List<Users> findAll() {
+    public List<User> findAll() {
         return usersRepository.listAll();
     }
 }

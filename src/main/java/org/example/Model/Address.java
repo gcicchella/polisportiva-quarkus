@@ -1,15 +1,13 @@
 package org.example.Model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity(name= "address")
 public class Address {
 
     @Id
     @Column(name = "id_address")
-    private Integer id;
+    private String id;
 
     @Column(name = "state")
     private String state;
@@ -18,19 +16,19 @@ public class Address {
     private String city;
 
     @Column(name = "street_name")
-    private String street_name;
+    private String streetName;
 
     @Column(name = "street_number")
-    private Integer street_number;
+    private Integer streetNumber;
 
     @Column(name = "postcode")
     private Integer postcode;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -50,20 +48,20 @@ public class Address {
         this.city = city;
     }
 
-    public String getStreet_name() {
-        return street_name;
+    public String getStreetName() {
+        return streetName;
     }
 
-    public void setStreet_name(String street_name) {
-        this.street_name = street_name;
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
     }
 
-    public Integer getStreet_number() {
-        return street_number;
+    public Integer getStreetNumber() {
+        return streetNumber;
     }
 
-    public void setStreet_number(Integer street_number) {
-        this.street_number = street_number;
+    public void setStreetNumber(Integer streetNumber) {
+        this.streetNumber = streetNumber;
     }
 
     public Integer getPostcode() {

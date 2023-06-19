@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Singleton
-public class UsersServiceImplementation implements UsersService{
+public class UsersServiceImplementation implements UsersService {
     @Inject
     private UsersRepository usersRepository;
 

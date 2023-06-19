@@ -21,8 +21,14 @@ public class UsersServiceImplementation implements UsersService{
     private AddressRepository addressRepository;
 
     @Override
-    public List<User> findAll() {
-        return usersRepository.listAll();
+    public Response findAll() {
+        try{
+            List<User> userList = usersRepository.listAll();
+            return Response.ok(userList).build();
+        }
+        catch (Exception e){
+            return Response.serverError().entity("Errore durante la ricerca").build();
+        }
     }
 
     @Transactional
@@ -62,10 +68,11 @@ public class UsersServiceImplementation implements UsersService{
     public Response getUserById(String userId) {
         try{
             User user = usersRepository.findById(userId);
+            if(user == null) return Response.status(404).entity("Utente non trovato").build();
             return Response.ok(user).build();
         }
         catch (Exception e){
-            return Response.serverError().entity("Utente non trovato").build();
+            return Response.serverError().entity("Errore nella ricerca").build();
         }
     }
 

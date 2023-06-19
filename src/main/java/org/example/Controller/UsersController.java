@@ -19,18 +19,13 @@ public class UsersController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<User> getUsers() {
+    public Response findAll() {
         return usersService.findAll();
     }
 
     @POST
     public Response createUser(User user) {
-        try {
-            Response response = usersService.createUser(user);
-            return response;
-        } catch (Exception e) {
-            return Response.serverError().entity("Errore durante la creazione dell'utente").build();
-        }
+        return usersService.createUser(user);
     }
 
     @DELETE
@@ -45,6 +40,4 @@ public class UsersController {
     public Response getUserById(@PathParam("userId") String userId) {
         return usersService.getUserById(userId);
     }
-
-
 }

@@ -50,9 +50,9 @@ public class UsersServiceImplementation implements UsersService {
 
     @Transactional
     @Override
-    public Response deleteUser(String userId) {
+    public Response deleteUser(String id_user) {
         try {
-            Boolean response = usersRepository.deleteById(userId);
+            Boolean response = usersRepository.deleteById(id_user);
             String msg = "Utente non eliminato";
             if(response){
                 msg = "Utente eliminato";
@@ -65,9 +65,9 @@ public class UsersServiceImplementation implements UsersService {
     }
 
     @Override
-    public Response getUserById(String userId) {
+    public Response getUserById(String id_user) {
         try{
-            User user = usersRepository.findById(userId);
+            User user = usersRepository.findById(id_user);
             if(user == null) return Response.status(404).entity("Utente non trovato").build();
             return Response.ok(user).build();
         }

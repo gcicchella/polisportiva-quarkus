@@ -5,11 +5,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.example.Model.User;
-import org.example.Repository.UsersRepository;
 import org.example.Service.UsersService;
-import org.jboss.resteasy.annotations.Body;
-
-import java.util.List;
 
 @Path("/api/users")
 public class UsersController {
@@ -29,15 +25,15 @@ public class UsersController {
     }
 
     @DELETE
-    @Path("/{userId}")
-    public Response deleteUser(@PathParam("userId") String userId) {
-        return usersService.deleteUser(userId);
+    @Path("/{id_user}")
+    public Response deleteUser(@PathParam("id_user") String id_user) {
+        return usersService.deleteUser(id_user);
     }
 
     @GET
-    @Path("/{userId}")
+    @Path("/{id_user}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserById(@PathParam("userId") String userId) {
-        return usersService.getUserById(userId);
+    public Response getUserById(@PathParam("id_user") String id_user) {
+        return usersService.getUserById(id_user);
     }
 }

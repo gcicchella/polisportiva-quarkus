@@ -1,6 +1,11 @@
 package org.example.Model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity(name= "sports_facility")
 public class SportsFacility {
@@ -25,6 +30,10 @@ public class SportsFacility {
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
+
+    @OneToMany(mappedBy = "sportsFacility", cascade = CascadeType.REMOVE)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<SportsField> sportsField = new LinkedList<>();
 
     public String getId() {
         return id;

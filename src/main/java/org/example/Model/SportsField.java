@@ -2,8 +2,8 @@ package org.example.Model;
 
 import jakarta.persistence.*;
 
-@Entity(name= "sports_fields")
-public class SportsFields {
+@Entity(name= "sports_field")
+public class SportsField {
 
     @Id
     @Column(name = "id_sports_fields")

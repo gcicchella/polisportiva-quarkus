@@ -4,11 +4,11 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.example.Model.SportsFields;
+import org.example.Model.SportsField;
 import org.example.Service.SportsFieldsService;
 
 @Path("/api/sportsFields")
-public class SportsFieldsController {
+public class SportsFieldController {
 
     @Inject
     SportsFieldsService sportsFieldsService;
@@ -20,8 +20,8 @@ public class SportsFieldsController {
     }
 
     @POST
-    public Response createSportsFields(SportsFields sportsFields) {
-        return sportsFieldsService.createSportsFields(sportsFields);
+    public Response createSportsFields(SportsField sportsField) {
+        return sportsFieldsService.createSportsFields(sportsField);
     }
 
     @DELETE

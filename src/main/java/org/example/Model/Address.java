@@ -7,7 +7,8 @@ public class Address {
 
     @Id
     @Column(name = "id_address")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "state")
     private String state;
@@ -24,11 +25,11 @@ public class Address {
     @Column(name = "postcode")
     private Integer postcode;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

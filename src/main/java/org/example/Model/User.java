@@ -1,13 +1,20 @@
 package org.example.Model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity(name= "users")
 public class User {
 
     @Id
-    @Column (name = "id_user")
-    private String id;
+    @Column(name = "id_user")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "username")
     private String username;
@@ -27,15 +34,23 @@ public class User {
     @Column(name = "fiscal_code")
     private String fiscalCode;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "address_id")
     private Address address;
 
-    public String getId() {
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<SportsFacility> sportsFacility = new LinkedList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<SportsField> sportsField = new LinkedList<>();
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

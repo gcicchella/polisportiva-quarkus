@@ -10,7 +10,6 @@ import org.example.Repository.AddressRepository;
 import org.example.Repository.UsersRepository;
 
 import java.util.List;
-import java.util.UUID;
 
 @Singleton
 public class UsersServiceImplementation implements UsersService {
@@ -34,14 +33,10 @@ public class UsersServiceImplementation implements UsersService {
     @Transactional
     public Response createUser(User user) {
         try {
-            Address address = user.getAddress();
-            address.setId(UUID.randomUUID().toString());
-            addressRepository.persist(address);
-
-            user.setAddress(address);
-            user.setId(UUID.randomUUID().toString());
+            //Address address = user.getAddress();
+            //addressRepository.persist(address);
+            //user.setAddress(address);
             usersRepository.persist(user);
-
             return Response.ok("Utente creato").build();
         } catch (Exception e) {
             return Response.serverError().entity("Utente non creato").build();

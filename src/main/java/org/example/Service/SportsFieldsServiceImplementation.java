@@ -4,8 +4,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
-import org.example.Model.SportsFields;
-import org.example.Model.User;
+import org.example.Model.SportsField;
 import org.example.Repository.*;
 
 import java.util.List;
@@ -28,8 +27,8 @@ public class SportsFieldsServiceImplementation implements SportsFieldsService {
     @Override
     public Response findAll() {
         try{
-            List<SportsFields> SportsFieldsList = sportsFieldsRepository.listAll();
-            return Response.ok(SportsFieldsList).build();
+            List<SportsField> sportsFieldList = sportsFieldsRepository.listAll();
+            return Response.ok(sportsFieldList).build();
         }
         catch (Exception e){
             return Response.serverError().entity("Errore durante la ricerca").build();
@@ -38,7 +37,7 @@ public class SportsFieldsServiceImplementation implements SportsFieldsService {
 
     @Transactional
     @Override
-    public Response createSportsFields(SportsFields sportsFields) {
+    public Response createSportsFields(SportsField sportsField) {
         return null;
     }
 
@@ -61,9 +60,9 @@ public class SportsFieldsServiceImplementation implements SportsFieldsService {
     @Override
     public Response getSportsFieldsById(String id_sports_fields) {
         try{
-            SportsFields sportsFields = sportsFieldsRepository.findById(id_sports_fields);
-            if(sportsFields == null) return Response.status(404).entity("Campo sportivo non trovato").build();
-            return Response.ok(sportsFields).build();
+            SportsField sportsField = sportsFieldsRepository.findById(id_sports_fields);
+            if(sportsField == null) return Response.status(404).entity("Campo sportivo non trovato").build();
+            return Response.ok(sportsField).build();
         }
         catch (Exception e){
             return Response.serverError().entity("Errore nella ricerca").build();

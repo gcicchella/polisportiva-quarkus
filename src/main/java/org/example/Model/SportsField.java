@@ -7,7 +7,8 @@ public class SportsField {
 
     @Id
     @Column(name = "id_sports_fields")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "nome")
     private String nome;
@@ -24,7 +25,7 @@ public class SportsField {
     @Column(name = "tennis_field_type")
     private String tennisFieldType;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_price_list")
     private PriceList priceList;
 
@@ -36,11 +37,11 @@ public class SportsField {
     @JoinColumn(name = "id_sports_facility")
     private SportsFacility sportsFacility;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

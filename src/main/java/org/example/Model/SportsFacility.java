@@ -12,7 +12,8 @@ public class SportsFacility {
 
     @Id
     @Column(name = "id_sports_facility")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "nome")
     private String nome;
@@ -23,7 +24,7 @@ public class SportsFacility {
     @Column(name = "phone")
     private String phone;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_address")
     private Address address;
 
@@ -35,11 +36,11 @@ public class SportsFacility {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<SportsField> sportsField = new LinkedList<>();
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

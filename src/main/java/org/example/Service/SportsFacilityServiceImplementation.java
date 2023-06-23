@@ -3,14 +3,19 @@ package org.example.Service;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
 import org.example.Model.Address;
 import org.example.Model.SportsFacility;
+import org.example.Model.User;
 import org.example.Repository.AddressRepository;
 import org.example.Repository.SportsFacilityRepository;
 import org.example.Repository.UsersRepository;
 
 import java.util.List;
+
+import static io.quarkus.hibernate.orm.panache.PanacheEntityBase.findById;
 
 @Singleton
 public class SportsFacilityServiceImplementation implements SportsFacilityService {
@@ -63,14 +68,18 @@ public class SportsFacilityServiceImplementation implements SportsFacilityServic
 
     @Transactional
     @Override
-    public Response getSportsFacilityByUserId(Long id_user) {
+    public Response getSportsFacilityByUserId(@PathParam("id_user") Long id_user) {
         try{
-            SportsFacility sportsFacility = sportsFacilityRepository.findById(id_user);
-            if(sportsFacility == null) return Response.status(404).entity("Impianto sportivo non associato a nessun utente").build();
-            return Response.ok(sportsFacility).build();
+            User user = usersRepository.findById(id_user);
+            if (user != null){
+                List<SportsFacility> sportsFacility = sportsFacilityRepository.getSportsFacilityByUserId(id_user);
+                if(sportsFacility == null) return Response.status(404).entity("Impianto sportivo non associato a nessun utente").build();
+                return Response.ok(sportsFacility).build();
+            }
+            return Response.serverError().entity("Utente non trovato").build();
         }
         catch (Exception e){
-            return Response.serverError().entity("Errore nella ricerca").build();
+            return Response.serverError().entity(e.getMessage()).build();
         }
     }
 

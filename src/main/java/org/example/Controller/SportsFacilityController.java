@@ -31,7 +31,14 @@ public class SportsFacilityController {
     }
 
     @GET
-    @Path("/{id_sports_facility}")
+    @Path("/getSportsFacilityByUserId/{id_user}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getSportsFacilityByUserId(@PathParam("id_user") Long id_user) {
+        return sportsFacilityService.getSportsFacilityByUserId(id_user);
+    }
+
+    @GET
+    @Path("/getSportsFacilityById/{id_sports_facility}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSportsFacilityById(@PathParam("id_sports_facility") Long id_sports_facility) {
         return sportsFacilityService.getSportsFacilityById(id_sports_facility);

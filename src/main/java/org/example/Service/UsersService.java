@@ -8,7 +8,7 @@ public interface UsersService {
 
     Response createUser(User user);
 
-    Response deleteUser(String id_user);
+    Response deleteUser(Long id_user);
 
-    Response getUserById(String id_user);
+    Response getUserById(Long id_user);
 }

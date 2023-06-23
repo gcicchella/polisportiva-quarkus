@@ -5,6 +5,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import org.example.Model.SportsField;
 
 @ApplicationScoped
-public class SportsFieldsRepository implements PanacheRepositoryBase<SportsField, String> {
+public class SportsFieldsRepository implements PanacheRepositoryBase<SportsField, Long> {
 }
 

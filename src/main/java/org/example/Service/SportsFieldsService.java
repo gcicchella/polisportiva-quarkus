@@ -7,9 +7,9 @@ public interface SportsFieldsService {
 
     Response findAll();
 
-    Response createSportsFields(SportsField sportsField);
+    Response createSportsField(SportsField sportsField);
 
-    Response deleteSportsFields(String id_sports_fields);
+    Response deleteSportsFieldById(Long id_sports_fields);
 
-    Response getSportsFieldsById(String id_sports_fields);
+    Response getSportsFieldsById(Long id_sports_fields);
 }

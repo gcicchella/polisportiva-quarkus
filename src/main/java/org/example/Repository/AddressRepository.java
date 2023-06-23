@@ -5,5 +5,5 @@ import jakarta.enterprise.context.ApplicationScoped;
 import org.example.Model.Address;
 
 @ApplicationScoped
-public class AddressRepository implements PanacheRepositoryBase<Address, String> {
+public class AddressRepository implements PanacheRepositoryBase<Address, Long> {
 }

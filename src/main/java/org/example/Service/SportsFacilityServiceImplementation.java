@@ -38,12 +38,7 @@ public class SportsFacilityServiceImplementation implements SportsFacilityServic
     @Transactional
     public Response createSportsFacility(SportsFacility sportsFacility) {
         try {
-            Address address = sportsFacility.getUser().getAddress();
-            addressRepository.persist(address);
-
-            sportsFacility.getUser().setAddress(address);
-            usersRepository.persist(sportsFacility.getUser());
-
+            sportsFacilityRepository.persist(sportsFacility);
             return Response.ok("Impianto sportivo creato").build();
         } catch (Exception e) {
             return Response.serverError().entity("Impianto sportivo non creato").build();
@@ -52,7 +47,7 @@ public class SportsFacilityServiceImplementation implements SportsFacilityServic
 
     @Transactional
     @Override
-    public Response deleteSportsFacility(String id_sports_facility) {
+    public Response deleteSportsFacilityById(Long id_sports_facility) {
         try {
             Boolean response = sportsFacilityRepository.deleteById(id_sports_facility);
             String msg = "Impianto sportivo non eliminato";
@@ -67,7 +62,20 @@ public class SportsFacilityServiceImplementation implements SportsFacilityServic
     }
 
     @Transactional
-    public Response getSportsFacilityById(String id_sports_facility) {
+    @Override
+    public Response getSportsFacilityByUserId(Long id_user) {
+        try{
+            SportsFacility sportsFacility = sportsFacilityRepository.findById(id_user);
+            if(sportsFacility == null) return Response.status(404).entity("Impianto sportivo non associato a nessun utente").build();
+            return Response.ok(sportsFacility).build();
+        }
+        catch (Exception e){
+            return Response.serverError().entity("Errore nella ricerca").build();
+        }
+    }
+
+    @Transactional
+    public Response getSportsFacilityById(Long id_sports_facility) {
         try{
             SportsFacility sportsFacility = sportsFacilityRepository.findById(id_sports_facility);
             if(sportsFacility == null) return Response.status(404).entity("Impianto sportivo non trovato").build();

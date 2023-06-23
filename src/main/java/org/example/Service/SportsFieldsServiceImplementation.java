@@ -37,13 +37,13 @@ public class SportsFieldsServiceImplementation implements SportsFieldsService {
 
     @Transactional
     @Override
-    public Response createSportsFields(SportsField sportsField) {
+    public Response createSportsField(SportsField sportsField) {
         return null;
     }
 
     @Transactional
     @Override
-    public Response deleteSportsFields(String id_sports_fields) {
+    public Response deleteSportsFieldById(Long id_sports_fields) {
         try {
             Boolean response = sportsFieldsRepository.deleteById(id_sports_fields);
             String msg = "Campo sportivo non eliminato";
@@ -58,7 +58,7 @@ public class SportsFieldsServiceImplementation implements SportsFieldsService {
     }
 
     @Override
-    public Response getSportsFieldsById(String id_sports_fields) {
+    public Response getSportsFieldsById(Long id_sports_fields) {
         try{
             SportsField sportsField = sportsFieldsRepository.findById(id_sports_fields);
             if(sportsField == null) return Response.status(404).entity("Campo sportivo non trovato").build();

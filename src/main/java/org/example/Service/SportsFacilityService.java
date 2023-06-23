@@ -9,7 +9,9 @@ public interface SportsFacilityService {
 
     Response createSportsFacility(SportsFacility sportsFacility);
 
-    Response deleteSportsFacility(String id_sports_facility);
+    Response deleteSportsFacilityById(Long id_sports_facility);
 
-    Response getSportsFacilityById(String id_sports_facility);
+    Response getSportsFacilityByUserId(Long id_user);
+
+    Response getSportsFacilityById(Long id_sports_facility);
 }

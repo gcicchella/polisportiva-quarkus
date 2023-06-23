@@ -33,9 +33,6 @@ public class UsersServiceImplementation implements UsersService {
     @Transactional
     public Response createUser(User user) {
         try {
-            //Address address = user.getAddress();
-            //addressRepository.persist(address);
-            //user.setAddress(address);
             usersRepository.persist(user);
             return Response.ok("Utente creato").build();
         } catch (Exception e) {
@@ -45,7 +42,7 @@ public class UsersServiceImplementation implements UsersService {
 
     @Transactional
     @Override
-    public Response deleteUser(String id_user) {
+    public Response deleteUser(Long id_user) {
         try {
             Boolean response = usersRepository.deleteById(id_user);
             String msg = "Utente non eliminato";
@@ -60,7 +57,7 @@ public class UsersServiceImplementation implements UsersService {
     }
 
     @Override
-    public Response getUserById(String id_user) {
+    public Response getUserById(Long id_user) {
         try{
             User user = usersRepository.findById(id_user);
             if(user == null) return Response.status(404).entity("Utente non trovato").build();

@@ -5,5 +5,5 @@ import jakarta.enterprise.context.ApplicationScoped;
 import org.example.Model.User;
 
 @ApplicationScoped
-public class UsersRepository implements PanacheRepositoryBase<User, String> {
+public class UsersRepository implements PanacheRepositoryBase<User, Long> {
 }

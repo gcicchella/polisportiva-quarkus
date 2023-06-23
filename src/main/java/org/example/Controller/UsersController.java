@@ -26,14 +26,14 @@ public class UsersController {
 
     @DELETE
     @Path("/{id_user}")
-    public Response deleteUser(@PathParam("id_user") String id_user) {
+    public Response deleteUser(@PathParam("id_user") Long id_user) {
         return usersService.deleteUser(id_user);
     }
 
     @GET
     @Path("/{id_user}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserById(@PathParam("id_user") String id_user) {
+    public Response getUserById(@PathParam("id_user") Long id_user) {
         return usersService.getUserById(id_user);
     }
 }

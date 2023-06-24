@@ -45,6 +45,10 @@ public class User {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<SportsField> sportsField = new LinkedList<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<Reservation> reservations = new LinkedList<>();
+
     public Long getId() {
         return id;
     }

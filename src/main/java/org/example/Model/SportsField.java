@@ -17,7 +17,7 @@ public class SportsField {
     private String sport;
 
     @Column(name = "is_indoor")
-    private Boolean isIndoor;
+    private boolean isIndoor;
 
     @Column(name = "soccer_field_type")
     private String soccerFieldType;
@@ -61,11 +61,11 @@ public class SportsField {
         this.sport = sport;
     }
 
-    public Boolean getIndoor() {
+    public boolean isIndoor() {
         return isIndoor;
     }
 
-    public void setIndoor(Boolean indoor) {
+    public void setIndoor(boolean indoor) {
         isIndoor = indoor;
     }
 

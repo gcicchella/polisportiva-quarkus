@@ -12,4 +12,6 @@ public interface SportsFieldsService {
     Response deleteSportsFieldById(Long id_sports_fields);
 
     Response getSportsFieldsById(Long id_sports_fields);
+
+    Response findByUserIdAndSport(Long id_user, String sport);
 }

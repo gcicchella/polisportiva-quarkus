@@ -5,7 +5,9 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.example.Model.SportsFacility;
+import org.example.Model.SportsField;
 import org.example.Service.SportsFacilityService;
+import org.jboss.resteasy.annotations.Body;
 
 @Path("/api/sportsFacility")
 public class SportsFacilityController {
@@ -22,6 +24,12 @@ public class SportsFacilityController {
     @POST
     public Response createSportsFacility(SportsFacility sportsFacility) {
         return sportsFacilityService.createSportsFacility(sportsFacility);
+    }
+
+    @POST
+    @Path("/{id_sports_facility}/sports-fields")
+    public Response createSportsFieldBySportsFacility(@PathParam("id_sports_facility") Long id_sports_facility, SportsField sportsField) {
+        return sportsFacilityService.createSportsFieldBySportsFacility(id_sports_facility, sportsField);
     }
 
     @DELETE

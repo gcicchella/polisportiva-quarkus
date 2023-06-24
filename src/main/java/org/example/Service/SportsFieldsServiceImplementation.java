@@ -13,7 +13,7 @@ import java.util.List;
 public class SportsFieldsServiceImplementation implements SportsFieldsService {
 
     @Inject
-    private SportsFieldsRepository sportsFieldsRepository;
+    private SportsFieldRepository sportsFieldRepository;
 
     @Inject
     private PriceListRepository priceListRepository;
@@ -27,7 +27,7 @@ public class SportsFieldsServiceImplementation implements SportsFieldsService {
     @Override
     public Response findAll() {
         try{
-            List<SportsField> sportsFieldList = sportsFieldsRepository.listAll();
+            List<SportsField> sportsFieldList = sportsFieldRepository.listAll();
             return Response.ok(sportsFieldList).build();
         }
         catch (Exception e){
@@ -45,7 +45,7 @@ public class SportsFieldsServiceImplementation implements SportsFieldsService {
     @Override
     public Response deleteSportsFieldById(Long id_sports_fields) {
         try {
-            Boolean response = sportsFieldsRepository.deleteById(id_sports_fields);
+            Boolean response = sportsFieldRepository.deleteById(id_sports_fields);
             String msg = "Campo sportivo non eliminato";
             if(response){
                 msg = "Campo sportivo eliminato";
@@ -60,7 +60,7 @@ public class SportsFieldsServiceImplementation implements SportsFieldsService {
     @Override
     public Response getSportsFieldsById(Long id_sports_fields) {
         try{
-            SportsField sportsField = sportsFieldsRepository.findById(id_sports_fields);
+            SportsField sportsField = sportsFieldRepository.findById(id_sports_fields);
             if(sportsField == null) return Response.status(404).entity("Campo sportivo non trovato").build();
             return Response.ok(sportsField).build();
         }
@@ -68,4 +68,28 @@ public class SportsFieldsServiceImplementation implements SportsFieldsService {
             return Response.serverError().entity("Errore nella ricerca").build();
         }
     }
+
+    @Override
+    public Response findByUserIdAndSport(Long id_user, String sport) {
+        try {
+            List<SportsField> sportsFields = null;
+
+            if (id_user != null && sport != null) {
+                sportsFields = sportsFieldRepository.find("user.id = ?1 and sport = ?2", id_user, sport).list();
+            } else if (id_user != null) {
+                sportsFields = sportsFieldRepository.find("user.id = ?1", id_user).list();
+            } else if (sport != null) {
+                sportsFields = sportsFieldRepository.find("sport = ?1", sport).list();
+            } else {
+                sportsFields = sportsFieldRepository.listAll();
+            }
+            if (sportsFields == null) {
+                return Response.status(404).entity("Campo sportivo non trovato").build();
+            }
+            return Response.ok(sportsFields).build();
+        } catch (Exception e) {
+            return Response.serverError().entity("Errore nella ricerca").build();
+        }
+    }
+
 }

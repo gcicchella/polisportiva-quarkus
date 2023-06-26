@@ -54,11 +54,11 @@ public class SportsField {
         this.id = id;
     }
 
-    public String getNome() {
+    public String getName() {
         return name;
     }
 
-    public void setNome(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -74,8 +74,8 @@ public class SportsField {
         return isIndoor;
     }
 
-    public void setIndoor(boolean indoor) {
-        isIndoor = indoor;
+    public void setIsIndoor(boolean isIndoor) {
+        this.isIndoor = isIndoor;
     }
 
     public String getSoccerFieldType() {

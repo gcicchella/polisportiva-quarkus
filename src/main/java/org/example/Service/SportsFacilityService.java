@@ -4,6 +4,8 @@ import jakarta.ws.rs.core.Response;
 import org.example.Model.SportsFacility;
 import org.example.Model.SportsField;
 
+import java.time.ZonedDateTime;
+
 public interface SportsFacilityService {
 
     Response findAll();
@@ -17,4 +19,6 @@ public interface SportsFacilityService {
     Response getSportsFacilityByUserId(Long id_user);
 
     Response getSportsFacilityById(Long id_sports_facility);
+
+//    Response getReservationSummaries(Long id_sports_facility, ZonedDateTime startDate, ZonedDateTime endDate);
 }

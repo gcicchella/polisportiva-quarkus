@@ -13,6 +13,7 @@ import org.example.Repository.SportsFacilityRepository;
 import org.example.Repository.SportsFieldRepository;
 import org.example.Repository.UsersRepository;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import static io.quarkus.hibernate.orm.panache.PanacheEntityBase.findById;
@@ -114,4 +115,10 @@ public class SportsFacilityServiceImplementation implements SportsFacilityServic
             return Response.serverError().entity("Errore nella ricerca").build();
         }
     }
+
+//    @Override
+//    public Response getReservationSummaries(Long id_sports_facility, ZonedDateTime startDate, ZonedDateTime endDate) {
+//        return null;
+//    }
+
 }

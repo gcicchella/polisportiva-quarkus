@@ -9,6 +9,9 @@ import org.example.Model.SportsField;
 import org.example.Service.SportsFacilityService;
 import org.jboss.resteasy.annotations.Body;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Path("/api/sports-facilities")
 public class SportsFacilityController {
 
@@ -52,4 +55,12 @@ public class SportsFacilityController {
     public Response getSportsFacilityById(@PathParam("id_sports_facility") Long id_sports_facility) {
         return sportsFacilityService.getSportsFacilityById(id_sports_facility);
     }
+
+//    @GET
+//    @Path("/sports-facilities/{id_sports_facility}/reservations-summaries")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response getReservationSummaries(@PathParam("id_sports_facility") Long id_sports_facility, @QueryParam("start_date") ZonedDateTime startDate, @QueryParam("end_date") ZonedDateTime endDate) {
+//        return sportsFacilityService.getReservationSummaries(id_sports_facility, startDate, endDate);
+//    }
+
 }

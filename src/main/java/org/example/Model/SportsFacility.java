@@ -15,7 +15,7 @@ public class SportsFacility {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "nome")
+    @Column(name = "name")
     private String name;
 
     @Column(name = "total_sports_fields")

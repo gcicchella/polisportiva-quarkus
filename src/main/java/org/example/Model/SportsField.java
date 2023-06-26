@@ -15,7 +15,7 @@ public class SportsField {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "nome")
+    @Column(name = "name")
     private String name;
 
     @Column(name = "sport")
@@ -58,8 +58,8 @@ public class SportsField {
         return name;
     }
 
-    public void setNome(String nome) {
-        this.name = nome;
+    public void setNome(String name) {
+        this.name = name;
     }
 
     public String getSport() {

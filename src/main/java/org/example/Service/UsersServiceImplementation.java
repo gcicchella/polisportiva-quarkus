@@ -16,9 +16,6 @@ public class UsersServiceImplementation implements UsersService {
     @Inject
     private UsersRepository usersRepository;
 
-    @Inject
-    private AddressRepository addressRepository;
-
     @Override
     public Response findAll() {
         try{

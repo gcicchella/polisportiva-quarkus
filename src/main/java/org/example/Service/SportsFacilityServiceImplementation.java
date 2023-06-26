@@ -27,9 +27,6 @@ public class SportsFacilityServiceImplementation implements SportsFacilityServic
     private UsersRepository usersRepository;
 
     @Inject
-    private AddressRepository addressRepository;
-
-    @Inject
     private SportsFieldRepository sportsFieldRepository;
 
     @Override
@@ -45,7 +42,7 @@ public class SportsFacilityServiceImplementation implements SportsFacilityServic
 
     @Transactional
     public Response createSportsFacility(SportsFacility sportsFacility) {
-        try {
+        try{
             if(usersRepository.findById(sportsFacility.getUser().getId()) != null){
                 sportsFacilityRepository.persist(sportsFacility);
                 return Response.ok("Impianto sportivo creato").build();

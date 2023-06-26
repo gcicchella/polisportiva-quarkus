@@ -9,7 +9,7 @@ import org.example.Model.SportsField;
 import org.example.Service.SportsFacilityService;
 import org.jboss.resteasy.annotations.Body;
 
-@Path("/api/sportsFacility")
+@Path("/api/sports-facilities")
 public class SportsFacilityController {
 
     @Inject
@@ -38,6 +38,7 @@ public class SportsFacilityController {
         return sportsFacilityService.deleteSportsFacilityById(id_sports_facility);
     }
 
+//    ToDo: accorpare con findAll
     @GET
     @Path("/getSportsFacilityByUserId/{id_user}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -46,7 +47,7 @@ public class SportsFacilityController {
     }
 
     @GET
-    @Path("/getSportsFacilityById/{id_sports_facility}")
+    @Path("/{id_sports_facility}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSportsFacilityById(@PathParam("id_sports_facility") Long id_sports_facility) {
         return sportsFacilityService.getSportsFacilityById(id_sports_facility);

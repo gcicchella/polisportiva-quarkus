@@ -16,7 +16,7 @@ public class SportsField {
     private Long id;
 
     @Column(name = "nome")
-    private String nome;
+    private String name;
 
     @Column(name = "sport")
     private String sport;
@@ -42,9 +42,9 @@ public class SportsField {
     @JoinColumn(name = "id_sports_facility")
     private SportsFacility sportsFacility;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "sportsField", cascade = CascadeType.REMOVE)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<SportsField> sportsFields = new LinkedList<>();
+    private List<Reservation> reservations = new LinkedList<>();
 
     public Long getId() {
         return id;
@@ -55,11 +55,11 @@ public class SportsField {
     }
 
     public String getNome() {
-        return nome;
+        return name;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.name = nome;
     }
 
     public String getSport() {

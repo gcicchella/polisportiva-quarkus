@@ -15,15 +15,6 @@ public class SportsFieldsServiceImplementation implements SportsFieldsService {
     @Inject
     private SportsFieldRepository sportsFieldRepository;
 
-    @Inject
-    private PriceListRepository priceListRepository;
-
-    @Inject
-    private UsersRepository usersRepository;
-
-    @Inject
-    private SportsFacilityRepository sportsFacilityRepository;
-
     @Override
     public Response findAll() {
         try{
@@ -33,12 +24,6 @@ public class SportsFieldsServiceImplementation implements SportsFieldsService {
         catch (Exception e){
             return Response.serverError().entity("Errore durante la ricerca").build();
         }
-    }
-
-    @Transactional
-    @Override
-    public Response createSportsField(SportsField sportsField) {
-        return null;
     }
 
     @Transactional

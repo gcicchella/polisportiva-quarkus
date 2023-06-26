@@ -6,7 +6,6 @@ import org.example.Altro.Enumeration.ReservationStatus;
 import java.time.ZonedDateTime;
 
 @Entity(name= "reservation")
-
 public class Reservation {
 
     @Id

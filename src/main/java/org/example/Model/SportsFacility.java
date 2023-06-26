@@ -16,7 +16,7 @@ public class SportsFacility {
     private Long id;
 
     @Column(name = "nome")
-    private String nome;
+    private String name;
 
     @Column(name = "total_sports_fields")
     private Integer totalSportsFields;
@@ -45,11 +45,11 @@ public class SportsFacility {
     }
 
     public String getNome() {
-        return nome;
+        return name;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.name = nome;
     }
 
     public Integer getTotalSportsFields() {

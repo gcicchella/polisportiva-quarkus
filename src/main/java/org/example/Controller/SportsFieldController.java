@@ -7,32 +7,16 @@ import jakarta.ws.rs.core.Response;
 import org.example.Model.SportsField;
 import org.example.Service.SportsFieldsService;
 
-@Path("/api/sportsField")
+@Path("/api/sports-fields")
 public class SportsFieldController {
 
     @Inject
     SportsFieldsService sportsFieldsService;
 
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response findAll() {
-//        return sportsFieldsService.findAll();
-//    }
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll(@QueryParam("id_user") Long id_user, @QueryParam("sport") String sport) {
-//        if (id_user != null && sport != null) {
-            return sportsFieldsService.findByUserIdAndSport(id_user, sport);
-//        } else {
-//            return sportsFieldsService.findAll();
-//        }
-    }
-
-
-    @POST
-    public Response createSportsField(SportsField sportsField) {
-        return sportsFieldsService.createSportsField(sportsField);
+        return sportsFieldsService.findByUserIdAndSport(id_user, sport);
     }
 
     @DELETE

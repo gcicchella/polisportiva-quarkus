@@ -7,10 +7,8 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.example.Altro.DTO.ReservationDTO;
 import org.example.Altro.Enumeration.ReservationStatus;
-import org.example.Model.Reservation;
 import org.example.Model.ReservationRating;
 import org.example.Service.ReservationService;
-import org.jboss.resteasy.annotations.Body;
 
 @Path("/api/reservations")
 public class ReservationController {

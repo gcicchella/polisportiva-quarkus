@@ -33,9 +33,6 @@ public class ReservationServiceImplementation implements ReservationService {
     @Inject
     private ReservationRatingRepository reservationRatingRepository;
 
-
-
-
     @Override
     public Response findAll() {
         try{

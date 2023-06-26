@@ -7,6 +7,8 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.example.Altro.DTO.ReservationDTO;
 import org.example.Altro.Enumeration.ReservationStatus;
+import org.example.Model.Reservation;
+import org.example.Model.ReservationRating;
 import org.example.Service.ReservationService;
 import org.jboss.resteasy.annotations.Body;
 
@@ -41,4 +43,11 @@ public class ReservationController {
         System.out.println(reservationStatus);
         return reservationService.changeStatus(id_reservation, reservationStatus);
     }
+
+    @POST
+    @Path("/{id_reservation}/rating")
+    public Response createReservationRating(@PathParam("id_reservation") Long id_reservation, ReservationRating reservationRating) {
+        return reservationService.createReservationRating(id_reservation, reservationRating);
+    }
+
 }

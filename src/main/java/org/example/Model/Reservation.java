@@ -2,8 +2,12 @@ package org.example.Model;
 
 import jakarta.persistence.*;
 import org.example.Altro.Enumeration.ReservationStatus;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.ZonedDateTime;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity(name= "reservation")
 public class Reservation {
@@ -35,6 +39,10 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name = "id_sports_fields")
     private SportsField sportsField;
+
+    @OneToMany(mappedBy = "reservation", cascade = CascadeType.REMOVE)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<ReservationRating> reservationRatings = new LinkedList<>();
 
     public Long getId() {
         return id;

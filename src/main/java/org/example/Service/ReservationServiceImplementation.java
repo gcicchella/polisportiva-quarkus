@@ -61,9 +61,9 @@ public class ReservationServiceImplementation implements ReservationService {
             reservation.setUser(user);
             reservation.setSportsField(sportsField);
             reservationRepository.persist(reservation);
-            return Response.ok("Impianto sportivo creato").build();
+            return Response.ok("Prenotazione creata").build();
         } catch (Exception e) {
-            return Response.serverError().entity("Impianto sportivo non creato").build();
+            return Response.serverError().entity("Prenotazione non creata").build();
         }
     }
 
@@ -81,4 +81,19 @@ public class ReservationServiceImplementation implements ReservationService {
             return Response.serverError().entity("Prenotazione non eliminata").build();
         }
     }
+
+    @Transactional
+    @Override
+    public Response changeStatus(Long id_reservation, ReservationStatus reservationStatus) {
+        try {
+            Reservation reservation = reservationRepository.updateStatus(id_reservation, reservationStatus);
+            if (reservation == null) {
+                return Response.serverError().entity("Prenotazione non trovata").build();
+            }
+            return Response.ok("Stato modificato").build();
+        } catch (Exception e) {
+            return Response.serverError().entity("Stato non modificato").build();
+        }
+    }
+
 }

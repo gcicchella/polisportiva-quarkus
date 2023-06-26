@@ -1,12 +1,14 @@
 package org.example.Controller;
 
+import io.vertx.core.json.JsonObject;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.example.Altro.DTO.ReservationDTO;
-import org.example.Model.Reservation;
+import org.example.Altro.Enumeration.ReservationStatus;
 import org.example.Service.ReservationService;
+import org.jboss.resteasy.annotations.Body;
 
 @Path("/api/reservations")
 public class ReservationController {
@@ -29,5 +31,14 @@ public class ReservationController {
     @Path("/{id_reservation}")
     public Response deleteReservation(@PathParam("id_reservation") Long id_reservation) {
         return reservationService.deleteReservation(id_reservation);
+    }
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/{id_reservation}/status")
+    public Response changeStatus(@PathParam("id_reservation") Long id_reservation, JsonObject json){
+        ReservationStatus reservationStatus = ReservationStatus.valueOf(json.getString("state"));
+        System.out.println(reservationStatus);
+        return reservationService.changeStatus(id_reservation, reservationStatus);
     }
 }

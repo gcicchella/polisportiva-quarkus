@@ -8,12 +8,12 @@ import org.example.Altro.DTO.ReservationDTO;
 import org.example.Altro.Enumeration.ReservationStatus;
 import org.example.Model.Reservation;
 import org.example.Model.ReservationRating;
-import org.example.Model.SportsField;
+import org.example.Model.SportField;
 import org.example.Model.User;
 import org.example.Repository.ReservationRatingRepository;
 import org.example.Repository.ReservationRepository;
-import org.example.Repository.SportsFieldRepository;
-import org.example.Repository.UsersRepository;
+import org.example.Repository.SportFieldRepository;
+import org.example.Repository.UserRepository;
 
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -25,10 +25,10 @@ public class ReservationServiceImplementation implements ReservationService {
     private ReservationRepository reservationRepository;
 
     @Inject
-    private UsersRepository usersRepository;
+    private UserRepository userRepository;
 
     @Inject
-    private SportsFieldRepository sportsFieldRepository;
+    private SportFieldRepository sportFieldRepository;
 
     @Inject
     private ReservationRatingRepository reservationRatingRepository;
@@ -48,12 +48,12 @@ public class ReservationServiceImplementation implements ReservationService {
     @Override
     public Response createReservation(ReservationDTO reservationDTO) {
         try{
-            User user = usersRepository.findById(reservationDTO.getOwnerId());
+            User user = userRepository.findById(reservationDTO.getOwnerId());
             if(user == null){
                 return Response.serverError().entity("Utente non trovato").build();
             }
-            SportsField sportsField = sportsFieldRepository.findById(reservationDTO.getSportsFieldId());
-            if(sportsField == null){
+            SportField sportField = sportFieldRepository.findById(reservationDTO.getSportsFieldId());
+            if(sportField == null){
                 return Response.serverError().entity("Campo non trovato").build();
             }
             Reservation reservation = new Reservation();
@@ -63,7 +63,7 @@ public class ReservationServiceImplementation implements ReservationService {
             reservation.setState(ReservationStatus.PENDING);
             reservation.setPrice((double) 0);
             reservation.setUser(user);
-            reservation.setSportsField(sportsField);
+            reservation.setSportsField(sportField);
             reservationRepository.persist(reservation);
             return Response.ok("Prenotazione creata").build();
         } catch (Exception e) {

@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Entity(name= "sports_facility")
-public class SportsFacility {
+public class SportFacility {
 
     @Id
     @Column(name = "id_sports_facility")
@@ -32,9 +32,9 @@ public class SportsFacility {
     @JoinColumn(name = "id_user")
     private User user;
 
-    @OneToMany(mappedBy = "sportsFacility", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "sportFacility", cascade = CascadeType.REMOVE)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<SportsField> sportsField = new LinkedList<>();
+    private List<SportField> sportField = new LinkedList<>();
 
     public Long getId() {
         return id;

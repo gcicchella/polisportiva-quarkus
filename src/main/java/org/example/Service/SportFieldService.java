@@ -1,9 +1,8 @@
 package org.example.Service;
 
 import jakarta.ws.rs.core.Response;
-import org.example.Model.SportsField;
 
-public interface SportsFieldsService {
+public interface SportFieldService {
 
     Response findAll();
 

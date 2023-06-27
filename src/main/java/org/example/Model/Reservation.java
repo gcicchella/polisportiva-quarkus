@@ -38,7 +38,7 @@ public class Reservation {
 
     @ManyToOne
     @JoinColumn(name = "id_sports_fields")
-    private SportsField sportsField;
+    private SportField sportField;
 
     @OneToMany(mappedBy = "reservation", cascade = CascadeType.REMOVE)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -100,11 +100,11 @@ public class Reservation {
         this.user = user;
     }
 
-    public SportsField getSportsField() {
-        return sportsField;
+    public SportField getSportsField() {
+        return sportField;
     }
 
-    public void setSportsField(SportsField sportsField) {
-        this.sportsField = sportsField;
+    public void setSportsField(SportField sportField) {
+        this.sportField = sportField;
     }
 }

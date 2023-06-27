@@ -1,6 +1,6 @@
 package org.example.Altro.DTO;
 
-public class SportsReservationReportDTO {
+public class SportReservationReportDTO {
     private int totalReservations;
     private String sport;
     private double totalRevenue;
@@ -8,7 +8,7 @@ public class SportsReservationReportDTO {
     private int acceptedReservations;
     private int pendingReservations;
 
-    public SportsReservationReportDTO(int totalReservations, String sport, double totalRevenue, int rejectedReservations, int acceptedReservations, int pendingReservations) {
+    public SportReservationReportDTO(int totalReservations, String sport, double totalRevenue, int rejectedReservations, int acceptedReservations, int pendingReservations) {
         this.totalReservations = totalReservations;
         this.sport = sport;
         this.totalRevenue = totalRevenue;

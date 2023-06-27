@@ -1,18 +1,16 @@
 package org.example.Service;
 
 import jakarta.ws.rs.core.Response;
-import org.example.Model.SportsFacility;
-import org.example.Model.SportsField;
+import org.example.Model.SportFacility;
+import org.example.Model.SportField;
 
-import java.time.ZonedDateTime;
-
-public interface SportsFacilityService {
+public interface SportFacilityService {
 
     Response findAll();
 
-    Response createSportsFacility(SportsFacility sportsFacility);
+    Response createSportsFacility(SportFacility sportFacility);
 
-    Response createSportsFieldBySportsFacility(Long id_sports_facility, SportsField sportsField);
+    Response createSportsFieldBySportsFacility(Long id_sports_facility, SportField sportField);
 
     Response deleteSportsFacilityById(Long id_sports_facility);
 

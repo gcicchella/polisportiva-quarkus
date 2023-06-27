@@ -39,11 +39,11 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<SportsFacility> sportsFacility = new LinkedList<>();
+    private List<SportFacility> sportFacility = new LinkedList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<SportsField> sportsField = new LinkedList<>();
+    private List<SportField> sportField = new LinkedList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @OnDelete(action = OnDeleteAction.CASCADE)

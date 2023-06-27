@@ -8,9 +8,9 @@ public class ReservationSummaryDTO {
     private LocalDate startDate;
     private LocalDate endDate;
     private LocalDate createdAt;
-    private List<SportsReservationReportDTO> sportsReservationReports;
+    private List<SportReservationReportDTO> sportsReservationReports;
 
-    public ReservationSummaryDTO(String sportsFacilityID, LocalDate startDate, LocalDate endDate, LocalDate createdAt, List<SportsReservationReportDTO> sportsReservationReports) {
+    public ReservationSummaryDTO(String sportsFacilityID, LocalDate startDate, LocalDate endDate, LocalDate createdAt, List<SportReservationReportDTO> sportsReservationReports) {
         this.sportsFacilityID = sportsFacilityID;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -50,11 +50,11 @@ public class ReservationSummaryDTO {
         this.createdAt = createdAt;
     }
 
-    public List<SportsReservationReportDTO> getSportsReservationReports() {
+    public List<SportReservationReportDTO> getSportsReservationReports() {
         return sportsReservationReports;
     }
 
-    public void setSportsReservationReports(List<SportsReservationReportDTO> sportsReservationReports) {
+    public void setSportsReservationReports(List<SportReservationReportDTO> sportsReservationReports) {
         this.sportsReservationReports = sportsReservationReports;
     }
 }

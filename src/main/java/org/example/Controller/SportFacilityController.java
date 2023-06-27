@@ -23,18 +23,46 @@ public class SportFacilityController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findAll() {
+    public Response find(@QueryParam("id_user") Long id_user) {
         try{
-            List<SportFacility> sportFacilityList = sportFacilityService.findAll();
-            if(sportFacilityList.size() != 0){
-                return Response.ok(sportFacilityList).build();
+            if(id_user != null){
+                User user = userService.getUserById(id_user);
+                if (user != null){
+                    List<SportFacility> sportFacilityList = sportFacilityService.getSportsFacilityByUserId(id_user);
+                    if(sportFacilityList.size() != 0){
+                        return Response.ok(sportFacilityList).build();
+                    }
+                    return Response.serverError().entity("Impianti sportivi non trovati").build();
+                }
+                return Response.serverError().entity("Utente non trovato").build();
             }
-            return Response.serverError().entity("Impianti sportivi non trovati").build();
+            else {
+                List<SportFacility> sportFacilityList = sportFacilityService.findAll();
+                if(sportFacilityList.size() != 0){
+                    return Response.ok(sportFacilityList).build();
+                }
+                return Response.serverError().entity("Impianti sportivi non trovati").build();
+            }
         }
         catch (Exception e){
             return Response.serverError().entity("Errore durante la ricerca").build();
         }
     }
+//    @GET
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response findAll() {
+//        try{
+//            List<SportFacility> sportFacilityList = sportFacilityService.findAll();
+//            if(sportFacilityList.size() != 0){
+//                return Response.ok(sportFacilityList).build();
+//            }
+//            return Response.serverError().entity("Impianti sportivi non trovati").build();
+//        }
+//        catch (Exception e){
+//            return Response.serverError().entity("Errore durante la ricerca").build();
+//        }
+//    }
+
 
     @POST
     public Response createSportsFacility(SportFacility sportFacility) {
@@ -81,27 +109,25 @@ public class SportFacilityController {
         }
     }
 
-//    ToDo: accorpare con findAll
-    @GET
-    @Path("/getSportsFacilityByUserId/{id_user}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getSportsFacilityByUserId(@PathParam("id_user") Long id_user) {
-        try {
-            User user = userService.getUserById(id_user);
-            if (user != null){
-                List<SportFacility> sportFacilityList = sportFacilityService.getSportsFacilityByUserId(id_user);
-                if(sportFacilityList.size() != 0){
-                    return Response.ok(sportFacilityList).build();
-                }
-                return Response.serverError().entity("Impianti sportivi non trovati").build();
-            }
-            return Response.serverError().entity("Utente non trovato").build();
-        }
-        catch (Exception e){
-            return Response.serverError().entity("Errore durante la ricerca").build();
-        }
-    }
-
+//    @GET
+//    @Path("/getSportsFacilityByUserId/{id_user}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response getSportsFacilityByUserId(@PathParam("id_user") Long id_user) {
+//        try {
+//            User user = userService.getUserById(id_user);
+//            if (user != null){
+//                List<SportFacility> sportFacilityList = sportFacilityService.getSportsFacilityByUserId(id_user);
+//                if(sportFacilityList.size() != 0){
+//                    return Response.ok(sportFacilityList).build();
+//                }
+//                return Response.serverError().entity("Impianti sportivi non trovati").build();
+//            }
+//            return Response.serverError().entity("Utente non trovato").build();
+//        }
+//        catch (Exception e){
+//            return Response.serverError().entity("Errore durante la ricerca").build();
+//        }
+//    }
     @GET
     @Path("/{id_sports_facility}")
     @Produces(MediaType.APPLICATION_JSON)

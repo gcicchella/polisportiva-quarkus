@@ -103,7 +103,7 @@ public class ReservationController {
         try {
             Reservation reservation = reservationService.getReservationById(id_reservation);
             if (reservation != null) {
-               ReservationRating reservationRating1 = reservationService.createReservationRating(id_reservation, reservationRating);
+               ReservationRating reservationRating1 = reservationService.createReservationRating(reservation, reservationRating);
                 if(reservationRating1 != null){
                     return Response.ok(reservationRating1).build();
                 }

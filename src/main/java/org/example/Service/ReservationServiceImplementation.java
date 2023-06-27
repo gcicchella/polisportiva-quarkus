@@ -25,12 +25,6 @@ public class ReservationServiceImplementation implements ReservationService {
     private ReservationRepository reservationRepository;
 
     @Inject
-    private UserRepository userRepository;
-
-    @Inject
-    private SportFieldRepository sportFieldRepository;
-
-    @Inject
     private ReservationRatingRepository reservationRatingRepository;
 
     @Override
@@ -57,33 +51,6 @@ public class ReservationServiceImplementation implements ReservationService {
         else return null;
     }
 
-//    @Transactional
-//    @Override
-//    public Response createReservation(ReservationDTO reservationDTO) {
-//        try{
-//            User user = userRepository.findById(reservationDTO.getOwnerId());
-//            if(user == null){
-//                return Response.serverError().entity("Utente non trovato").build();
-//            }
-//            SportField sportField = sportFieldRepository.findById(reservationDTO.getSportsFieldId());
-//            if(sportField == null){
-//                return Response.serverError().entity("Campo non trovato").build();
-//            }
-//            Reservation reservation = new Reservation();
-//            reservation.setStartDateTime(reservationDTO.getStartDate());
-//            reservation.setEndDateTime(reservationDTO.getEndDate());
-//            reservation.setCreatedAt(ZonedDateTime.now());
-//            reservation.setState(ReservationStatus.PENDING);
-//            reservation.setPrice((double) 0);
-//            reservation.setUser(user);
-//            reservation.setSportsField(sportField);
-//            reservationRepository.persist(reservation);
-//            return Response.ok("Prenotazione creata").build();
-//        } catch (Exception e) {
-//            return Response.serverError().entity("Prenotazione non creata").build();
-//        }
-//    }
-
     @Transactional
     @Override
     public boolean deleteReservation(Long id_reservation) {
@@ -103,9 +70,10 @@ public class ReservationServiceImplementation implements ReservationService {
 
     @Transactional
     @Override
-    public ReservationRating createReservationRating(Long id_reservation, ReservationRating reservationRating) {
+    public ReservationRating createReservationRating(Reservation reservation, ReservationRating reservationRating) {
         reservationRating.setRating(reservationRating.getRating());
         reservationRating.setDescription(reservationRating.getDescription());
+        reservationRating.setReservation(reservation);
         reservationRatingRepository.persist(reservationRating);
         ReservationRating reservationRating1 = reservationRatingRepository.findById(reservationRating.getId());
         if(reservationRating1 != null){
@@ -113,22 +81,4 @@ public class ReservationServiceImplementation implements ReservationService {
         }
         else return null;
     }
-
-//    @Transactional
-//    @Override
-//    public Response createReservationRating(Long id_reservation, ReservationRating reservationRating) {
-//        try{
-//            Reservation reservation =  reservationRepository.findById(id_reservation);
-//            if(reservation == null){
-//                return Response.serverError().entity("Prenotazione non trovata").build();
-//            }
-//            reservationRating.setRating(reservationRating.getRating());
-//            reservationRating.setDescription(reservationRating.getDescription());
-//            reservationRatingRepository.persist(reservationRating);
-//            return Response.ok("Valutazione assegnata").build();
-//        } catch (Exception e) {
-//            return Response.serverError().entity("Valutazione non assegnata").build();
-//        }
-//    }
-
 }

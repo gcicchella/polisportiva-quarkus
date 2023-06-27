@@ -21,5 +21,5 @@ public interface ReservationService {
 
     Reservation changeStatus(Long id_reservation, ReservationStatus reservationStatus);
 
-    ReservationRating createReservationRating(Long id_reservation, ReservationRating reservationRating);
+    ReservationRating createReservationRating(Reservation reservation, ReservationRating reservationRating);
 }

@@ -16,6 +16,7 @@ import org.example.Repository.SportFieldRepository;
 import org.example.Repository.UserRepository;
 
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Singleton
@@ -60,6 +61,11 @@ public class ReservationServiceImplementation implements ReservationService {
     @Override
     public Reservation getReservationById(Long id_reservation) {
         return reservationRepository.findById(id_reservation);
+    }
+
+    @Override
+    public List<Reservation> getReservationByFacilityId(Long id_sports_facility, Date starDate, Date endDate) {
+        return reservationRepository.getReservationByFacilityId(id_sports_facility, starDate, endDate);
     }
 
     @Transactional

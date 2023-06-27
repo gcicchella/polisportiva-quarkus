@@ -7,6 +7,12 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import org.example.Altro.Enumeration.ReservationStatus;
 import org.example.Model.Reservation;
+import org.example.Model.SportFacility;
+
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Date;
+import java.util.List;
 
 @ApplicationScoped
 public class ReservationRepository implements PanacheRepositoryBase<Reservation, Long> {
@@ -23,6 +29,16 @@ public class ReservationRepository implements PanacheRepositoryBase<Reservation,
         return entityManager.find(Reservation.class, id_reservation);
     }
 
+    public List<Reservation> getReservationByFacilityId(Long id_sports_facility, Date startDate, Date endDate) {
+        ZonedDateTime startDateZoned = startDate.toInstant().atZone(ZoneId.systemDefault());
+        ZonedDateTime endDateZoned = endDate.toInstant().atZone(ZoneId.systemDefault());
 
-
+        return entityManager.createQuery("SELECT r FROM reservation r JOIN sports_field sf ON r.sportField.id = sf.id " +
+                        "WHERE (sf.sportFacility.id = :id_sports_facility)" +
+                        " AND (r.startDateTime >= :startDateZoned AND r.endDateTime <= :endDateZoned) ", Reservation.class)
+                .setParameter("id_sports_facility", id_sports_facility)
+                .setParameter("startDateZoned", startDateZoned)
+                .setParameter("endDateZoned", endDateZoned)
+                .getResultList();
+    }
 }

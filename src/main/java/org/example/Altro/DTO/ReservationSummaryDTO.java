@@ -1,16 +1,18 @@
 package org.example.Altro.DTO;
 
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 
 public class ReservationSummaryDTO {
-    private String sportsFacilityID;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private LocalDate createdAt;
+    private Long sportsFacilityID;
+    private Date startDate;
+    private Date endDate;
+    private Date createdAt;
     private List<SportReservationReportDTO> sportsReservationReports;
 
-    public ReservationSummaryDTO(String sportsFacilityID, LocalDate startDate, LocalDate endDate, LocalDate createdAt, List<SportReservationReportDTO> sportsReservationReports) {
+    public ReservationSummaryDTO(Long sportsFacilityID, Date startDate, Date endDate, Date createdAt, List<SportReservationReportDTO> sportsReservationReports) {
         this.sportsFacilityID = sportsFacilityID;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -18,35 +20,35 @@ public class ReservationSummaryDTO {
         this.sportsReservationReports = sportsReservationReports;
     }
 
-    public String getSportsFacilityID() {
+    public Long getSportsFacilityID() {
         return sportsFacilityID;
     }
 
-    public void setSportsFacilityID(String sportsFacilityID) {
+    public void setSportsFacilityID(Long sportsFacilityID) {
         this.sportsFacilityID = sportsFacilityID;
     }
 
-    public LocalDate getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
-    public LocalDate getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 

@@ -4,12 +4,17 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.example.Altro.DTO.ReservationSummaryDTO;
 import org.example.Model.SportFacility;
 import org.example.Model.SportField;
 import org.example.Model.User;
 import org.example.Service.SportFacilityService;
 import org.example.Service.UserService;
 
+import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 @Path("/api/sports-facilities")
@@ -144,11 +149,23 @@ public class SportFacilityController {
         }
     }
 
-//    @GET
-//    @Path("/sports-facilities/{id_sports_facility}/reservations-summaries")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response getReservationSummaries(@PathParam("id_sports_facility") Long id_sports_facility, @QueryParam("start_date") ZonedDateTime startDate, @QueryParam("end_date") ZonedDateTime endDate) {
-//        return sportsFacilityService.getReservationSummaries(id_sports_facility, startDate, endDate);
-//    }
+    @GET
+    @Path("{id_sports_facility}/reservations-summaries")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getReservationSummaries(@PathParam("id_sports_facility") Long id_sports_facility, @QueryParam("start_date") String startDate, @QueryParam("end_date") String endDate) {
+        try{
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date startDate1 = inputFormat.parse(startDate);
+            Date endDate1 = inputFormat.parse(endDate);
+            ReservationSummaryDTO reservationSummaryDTO = sportFacilityService.getReservationSummaries(id_sports_facility, startDate1, endDate1);
+            if(reservationSummaryDTO != null){
+                return Response.ok(reservationSummaryDTO).build();
+            }
+            return Response.serverError().entity("Report non creato").build();
+        }
+        catch (Exception e){
+            return Response.serverError().entity("Errore generico").build();
+        }
+    }
 
 }

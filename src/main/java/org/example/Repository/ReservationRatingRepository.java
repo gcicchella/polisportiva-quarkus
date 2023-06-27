@@ -6,5 +6,7 @@ import org.example.Model.ReservationRating;
 
 @ApplicationScoped
 public class ReservationRatingRepository implements PanacheRepositoryBase<ReservationRating, Long> {
+
+
 }
 

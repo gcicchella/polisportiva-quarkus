@@ -1,8 +1,11 @@
 package org.example.Service;
 
+import org.example.Altro.DTO.ReservationSummaryDTO;
 import org.example.Model.SportFacility;
 import org.example.Model.SportField;
 
+import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 
 public interface SportFacilityService {
@@ -19,5 +22,5 @@ public interface SportFacilityService {
 
     SportFacility getSportsFacilityById(Long id_sports_facility);
 
-//    Response getReservationSummaries(Long id_sports_facility, ZonedDateTime startDate, ZonedDateTime endDate);
+    ReservationSummaryDTO getReservationSummaries(Long id_sports_facility, Date startDate, Date endDate);
 }

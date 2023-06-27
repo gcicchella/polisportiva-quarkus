@@ -17,6 +17,9 @@ public class SportReservationReportDTO {
         this.pendingReservations = pendingReservations;
     }
 
+    public SportReservationReportDTO(){
+    }
+
     public int getTotalReservations() {
         return totalReservations;
     }

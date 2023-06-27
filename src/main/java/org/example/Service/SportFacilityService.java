@@ -4,19 +4,21 @@ import jakarta.ws.rs.core.Response;
 import org.example.Model.SportFacility;
 import org.example.Model.SportField;
 
+import java.util.List;
+
 public interface SportFacilityService {
 
-    Response findAll();
+    List<SportFacility> findAll();
 
-    Response createSportsFacility(SportFacility sportFacility);
+    SportFacility createSportsFacility(SportFacility sportFacility);
 
-    Response createSportsFieldBySportsFacility(Long id_sports_facility, SportField sportField);
+    SportField createSportsFieldBySportsFacility(SportFacility sportFacility, SportField sportField);
 
-    Response deleteSportsFacilityById(Long id_sports_facility);
+    boolean deleteSportsFacilityById(Long id_sports_facility);
 
-    Response getSportsFacilityByUserId(Long id_user);
+    List<SportFacility> getSportsFacilityByUserId(Long id_user);
 
-    Response getSportsFacilityById(Long id_sports_facility);
+    SportFacility getSportsFacilityById(Long id_sports_facility);
 
 //    Response getReservationSummaries(Long id_sports_facility, ZonedDateTime startDate, ZonedDateTime endDate);
 }

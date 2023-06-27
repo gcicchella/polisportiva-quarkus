@@ -14,8 +14,6 @@ import org.example.Repository.UserRepository;
 
 import java.util.List;
 
-import static io.quarkus.hibernate.orm.panache.PanacheEntityBase.findById;
-
 @Singleton
 public class SportFacilityServiceImplementation implements SportFacilityService {
 
@@ -29,89 +27,63 @@ public class SportFacilityServiceImplementation implements SportFacilityService 
     private SportFieldRepository sportFieldRepository;
 
     @Override
-    public Response findAll() {
-        try{
-            List<SportFacility> sportFacilityList = sportFacilityRepository.listAll();
-            return Response.ok(sportFacilityList).build();
-        }
-        catch (Exception e){
-            return Response.serverError().entity("Errore durante la ricerca").build();
-        }
+    public List<SportFacility> findAll() {
+        return sportFacilityRepository.listAll();
     }
 
     @Transactional
-    public Response createSportsFacility(SportFacility sportFacility) {
-        try{
-            if(userRepository.findById(sportFacility.getUser().getId()) != null){
-                sportFacilityRepository.persist(sportFacility);
-                return Response.ok("Impianto sportivo creato").build();
-            }
-            return Response.serverError().entity("Utente non trovato").build();
-        } catch (Exception e) {
-            return Response.serverError().entity("Impianto sportivo non creato").build();
+    public SportFacility createSportsFacility(SportFacility sportFacility) {
+        sportFacilityRepository.persist(sportFacility);
+        SportFacility sportFacility1 = sportFacilityRepository.findById(sportFacility.getId());
+        if(sportFacility1 != null){
+            return sportFacility1;
         }
+        else return null;
     }
 
     @Transactional
     @Override
-    public Response createSportsFieldBySportsFacility(Long id_sports_facility, SportField sportField) {
-        try {
-           SportFacility sportFacility = sportFacilityRepository.findById(id_sports_facility);
-            if(sportFacility != null){
-                sportField.setUser(sportFacility.getUser());
-                sportField.setSportsFacility(sportFacility);
-                sportFieldRepository.persist(sportField);
-                return Response.ok("Campo sportivo creato").build();
-            }
-            return Response.serverError().entity("Impianto sportivo non trovato").build();
-        } catch (Exception e) {
-            return Response.serverError().entity("Campo sportivo non creato").build();
-        }
+    public SportField createSportsFieldBySportsFacility(SportFacility sportFacility, SportField sportField) {
+         sportField.setUser(sportFacility.getUser());
+         sportField.setSportsFacility(sportFacility);
+         sportFieldRepository.persist(sportField);
+         SportField sportField1 = sportFieldRepository.findById(sportField.getId());
+         if(sportField1 != null) return sportField1;
+         return null;
+    }
+
+//    @Transactional
+//    @Override
+//    public Response createSportsFieldBySportsFacility(Long id_sports_facility, SportField sportField) {
+//        try {
+//            SportFacility sportFacility = sportFacilityRepository.findById(id_sports_facility);
+//            if(sportFacility != null){
+//                sportField.setUser(sportFacility.getUser());
+//                sportField.setSportsFacility(sportFacility);
+//                sportFieldRepository.persist(sportField);
+//                return Response.ok("Campo sportivo creato").build();
+//            }
+//            return Response.serverError().entity("Impianto sportivo non trovato").build();
+//        } catch (Exception e) {
+//            return Response.serverError().entity("Campo sportivo non creato").build();
+//        }
+//    }
+
+    @Transactional
+    @Override
+    public boolean deleteSportsFacilityById(Long id_sports_facility) {
+       return sportFacilityRepository.deleteById(id_sports_facility);
     }
 
     @Transactional
     @Override
-    public Response deleteSportsFacilityById(Long id_sports_facility) {
-        try {
-            Boolean response = sportFacilityRepository.deleteById(id_sports_facility);
-            String msg = "Impianto sportivo non eliminato";
-            if(response){
-                msg = "Impianto sportivo eliminato";
-            }
-            return Response.ok(msg).build();
-
-        } catch (Exception e) {
-            return Response.serverError().entity("Impianto sportivo non eliminato").build();
-        }
+    public List<SportFacility> getSportsFacilityByUserId(@PathParam("id_user") Long id_user) {
+       return sportFacilityRepository.getSportsFacilityByUserId(id_user);
     }
 
     @Transactional
-    @Override
-    public Response getSportsFacilityByUserId(@PathParam("id_user") Long id_user) {
-        try{
-            User user = userRepository.findById(id_user);
-            if (user != null){
-                List<SportFacility> sportFacility = sportFacilityRepository.getSportsFacilityByUserId(id_user);
-                if(sportFacility == null) return Response.status(404).entity("Impianto sportivo non associato a nessun utente").build();
-                return Response.ok(sportFacility).build();
-            }
-            return Response.serverError().entity("Utente non trovato").build();
-        }
-        catch (Exception e){
-            return Response.serverError().entity("Errore nella ricerca").build();
-        }
-    }
-
-    @Transactional
-    public Response getSportsFacilityById(Long id_sports_facility) {
-        try{
-            SportFacility sportFacility = sportFacilityRepository.findById(id_sports_facility);
-            if(sportFacility == null) return Response.status(404).entity("Impianto sportivo non trovato").build();
-            return Response.ok(sportFacility).build();
-        }
-        catch (Exception e){
-            return Response.serverError().entity("Errore nella ricerca").build();
-        }
+    public SportFacility getSportsFacilityById(Long id_sports_facility) {
+        return sportFacilityRepository.findById(id_sports_facility);
     }
 
 //    @Override

@@ -1,14 +1,17 @@
 package org.example.Service;
 
 import jakarta.ws.rs.core.Response;
+import org.example.Model.SportField;
+
+import java.util.List;
 
 public interface SportFieldService {
 
-    Response findAll();
+    List<SportField> findAll();
 
-    Response deleteSportsFieldById(Long id_sports_fields);
+    boolean deleteSportsFieldById(Long id_sports_fields);
 
-    Response getSportsFieldsById(Long id_sports_fields);
+    SportField getSportsFieldsById(Long id_sports_fields);
 
-    Response findByUserIdAndSport(Long id_user, String sport);
+    List<SportField> findByUserIdAndSport(Long id_user, String sport);
 }

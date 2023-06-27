@@ -70,6 +70,5 @@ public class UserController {
         catch (Exception e){
             return Response.serverError().entity("Errore nella ricerca").build();
         }
-
     }
 }

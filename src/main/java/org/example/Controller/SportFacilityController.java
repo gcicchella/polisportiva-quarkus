@@ -153,17 +153,19 @@ public class SportFacilityController {
     @Path("{id_sports_facility}/reservations-summaries")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getReservationSummaries(@PathParam("id_sports_facility") Long id_sports_facility, @QueryParam("start_date") String startDate, @QueryParam("end_date") String endDate) {
-        try{
+        try {
             SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date startDate1 = inputFormat.parse(startDate);
             Date endDate1 = inputFormat.parse(endDate);
+
             ReservationSummaryDTO reservationSummaryDTO = sportFacilityService.getReservationSummaries(id_sports_facility, startDate1, endDate1);
-            if(reservationSummaryDTO != null){
+            if (reservationSummaryDTO != null) {
                 return Response.ok(reservationSummaryDTO).build();
             }
             return Response.serverError().entity("Report non creato").build();
-        }
-        catch (Exception e){
+        } catch (IllegalArgumentException e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("La data di inizio non può essere maggiore della data di fine.").build();
+        } catch (Exception e) {
             return Response.serverError().entity("Errore generico").build();
         }
     }

@@ -74,8 +74,12 @@ public class SportFacilityServiceImplementation implements SportFacilityService 
         return sportFacilityRepository.findById(id_sports_facility);
     }
 
+//    ToDo: metti ZonedDateTime
     @Override
     public ReservationSummaryDTO getReservationSummaries(Long id_sports_facility, Date startDate, Date endDate) {
+        if (startDate.after(endDate)) {
+            throw new IllegalArgumentException("La data di inizio non può essere maggiore della data di fine.");
+        }
         SportFacility sportFacility = sportFacilityRepository.findById(id_sports_facility);
         if(sportFacility != null){
             List<Reservation> reservationList = reservationService.getReservationByFacilityId(id_sports_facility, startDate, endDate);
@@ -109,7 +113,6 @@ public class SportFacilityServiceImplementation implements SportFacilityService 
                 sportsReservationReports.add(soccerReservationReportDTO);
                 sportsReservationReports.add(basketReservationReportDTO);
                 sportsReservationReports.add(tennisReservationReportDTO);
-
                 return new ReservationSummaryDTO(id_sports_facility, startDate, endDate, new Date(), sportsReservationReports);
             }
             return null;

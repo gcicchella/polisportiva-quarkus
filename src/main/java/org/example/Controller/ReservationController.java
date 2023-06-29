@@ -86,7 +86,7 @@ public class ReservationController {
             if(reservationService.getReservationById(id_reservation) == null){
                 return Response.serverError().entity("Prenotazione non trovata").build();
             }
-            ReservationStatus reservationStatus = ReservationStatus.valueOf(json.getString("state"));
+            ReservationStatus reservationStatus = ReservationStatus.valueOf(json.getString("state").toUpperCase());
             Reservation reservation = reservationService.changeStatus(id_reservation, reservationStatus);
             if(reservation != null){
                 return Response.ok(reservation).build();

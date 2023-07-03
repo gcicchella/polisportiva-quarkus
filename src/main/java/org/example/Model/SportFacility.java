@@ -83,4 +83,12 @@ public class SportFacility {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public List<SportField> getSportField() {
+        return sportField;
+    }
+
+    public void setSportField(List<SportField> sportField) {
+        this.sportField = sportField;
+    }
 }

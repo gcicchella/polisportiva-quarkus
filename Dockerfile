@@ -7,6 +7,7 @@ COPY pom.xml .
 COPY src ./src
 
 RUN mvn install -DDB_URL=jdbc:postgresql://db:5432/polisportiva -DskipTests=true -f pom.xml
+#RUN mvn install -DskipTests=true -f pom.xml
 
 FROM openjdk:17
 

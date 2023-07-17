@@ -1,73 +1,46 @@
-# quarkus-project
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+<p align="center">
+  <a href="https://quarkus.io" target="blank"><img src="https://design.jboss.org/quarkus/logo/final/SVG/quarkus_logo_horizontal_rgb_default.svg" width="500" alt="Quarkus Logos" /></a>
+</p>
+<p align="center"><a href="https://quarkus.io/" target="_blank">Quarkus</a> è un framework Java Kubernetes native full-stack, realizzato per le macchine virtuali Java (JVM) e per la compilazione nativa. Il framework ottimizza Java specificamente per i container, trasformandolo in una piattaforma efficiente per ambienti serverless, cloud e Kubernetes.</p> <p align="center">
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+## Avvio dell'applicazione
 
-## Running the application in dev mode
+<a href="https://www.docker.com/" target="blank"><img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Logo Docker" width="300" height="180"></a>
 
-You can run your application in dev mode that enables live coding using:
-```shell script
-./mvnw compile quarkus:dev
+Per avviare l'applicazione, è necessario eseguire il seguente comando:
+
+```shell
+> docker-compose up --detach
 ```
+Il seguente utilizza il Docker Compose, per creare e avviare i contenitori richiesti per l'esecuzione dell'applicazione.
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+## Modifica del file docker-compose.yml
 
-## Packaging and running the application
+Se desideri avviare l'applicazione utilizzando OpenJDK, assicurati che l'istruzione `dockerfile` sia impostata su `Dockerfile` come segue:
 
-The application can be packaged using:
-```shell script
-./mvnw package
-```
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+    ```
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ```
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+Se invece desideri avviare l'applicazione utilizzando GraalVM, cambia l'istruzione `dockerfile` in `Dockerfile.graalvm` come segue:
 
-If you want to build an _über-jar_, execute the following command:
-```shell script
-./mvnw package -Dquarkus.package.type=uber-jar
-```
+    ```
+    build:
+      context: .
+      dockerfile: Dockerfile.graalvm
+    ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+## Documentazione
 
-## Creating a native executable
+- [Docker](https://www.docker.com/)
+- [Documentazione Docker](https://docs.docker.com/)
+- [Guida utente di Quarkus](https://quarkus.io)
+- [Riferimento di configurazione di Quarkus](https://quarkus.io/get-started/)
+- [Guide di Quarkus](https://quarkus.io/guides/)
 
-You can create a native executable using: 
-```shell script
-./mvnw package -Pnative
-```
+## Autore
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
-```shell script
-./mvnw package -Pnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/quarkus-project-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
-
-## Related Guides
-
-- Flyway ([guide](https://quarkus.io/guides/flyway)): Handle your database schema migrations
-- Hibernate Validator ([guide](https://quarkus.io/guides/validation)): Validate object properties (field, getter) and method parameters for your beans (REST, CDI, Jakarta Persistence)
-- Hibernate ORM with Panache ([guide](https://quarkus.io/guides/hibernate-orm-panache)): Simplify your persistence code for Hibernate ORM via the active record or the repository pattern
-- RESTEasy Classic ([guide](https://quarkus.io/guides/resteasy)): REST endpoint framework implementing Jakarta REST and more
-- JDBC Driver - PostgreSQL ([guide](https://quarkus.io/guides/datasource)): Connect to the PostgreSQL database via JDBC
-
-## Provided Code
-
-### Hibernate ORM
-
-Create your first JPA entity
-
-[Related guide section...](https://quarkus.io/guides/hibernate-orm)
-
-[Related Hibernate with Panache section...](https://quarkus.io/guides/hibernate-orm-panache)
-
-
-### RESTEasy JAX-RS
-
-Easily start your RESTful Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started#the-jax-rs-resources)
+- Autore - [Giuseppe Cicchella](https://github.com/gcicchella)

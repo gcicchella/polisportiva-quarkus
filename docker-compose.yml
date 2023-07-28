@@ -1,16 +1,6 @@
 version: '3'
-services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    environment:
-      - DB_URL=jdbc:postgresql://db:5432/polisportiva
-    depends_on:
-      - db
 
+services:
   db:
     image: postgres:11.5
     ports:
@@ -19,3 +9,16 @@ services:
       POSTGRES_DB: polisportiva
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_URL=jdbc:postgresql://db:5432/polisportiva
+    depends_on:
+      - db

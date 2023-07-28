@@ -2,8 +2,9 @@ package org.example.Repository;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.example.Model.Users;
+import org.example.Model.SportField;
 
 @ApplicationScoped
-public class UsersRepository implements PanacheRepositoryBase<Users, Integer> {
+public class SportFieldRepository implements PanacheRepositoryBase<SportField, Long> {
 }
+
